@@ -10,6 +10,7 @@ import com.example.online.shop.demo.service.BasketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,18 +34,29 @@ public class BasketServiceImpl implements BasketService {
             Product product = productOptional.get();
             Customer customer = customerOptional.get();
 
+            Basket basket1 = basketRepository.findByProductId(product.getId());
+            if (basket1 == null){
+
             if (basket.getQuantity() >= product.getQuantity()){
+                basket.setQuantity(product.getQuantity());
                 basket.setCustomer(customer);
                 basket.setProduct(product);
                 return basketRepository.save(basket);
-            }else if (basket.getQuantity() > product.getQuantity()){
-                basket.setQuantity((product.getQuantity()));
+            }
+            basket.setCustomer(customer);
+            basket.setProduct(product);
+            return basketRepository.save(basket);
+            }else {
+               if( basket1.getQuantity() + basket.getQuantity() >= product.getQuantity() ){
+                   basket1.setQuantity(product.getQuantity());
+                   return basketRepository.save(basket1);
+               }
+               basket1.setQuantity(basket1.getQuantity() + basket.getQuantity());
+               return basketRepository.save(basket1);
             }
         }
+        throw new EntityNotFoundException();
 
-
-
-        return basketRepository.save(basket);
     }
 
     @Override
