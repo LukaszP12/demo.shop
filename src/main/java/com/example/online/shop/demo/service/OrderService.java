@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface OrderService {
 
-    Order save(Order order);
+    void saveById(Long id);
 
-
+    List<Order> orderByCustomerId(Long id);
 
 }

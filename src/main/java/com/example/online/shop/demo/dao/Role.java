@@ -2,10 +2,8 @@ package com.example.online.shop.demo.dao;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -19,5 +17,7 @@ public class Role {
     private Long id;
     private String name;
 
+    @ManyToMany
+    private List<Order> orderList;
 
 }

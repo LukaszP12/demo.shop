@@ -12,5 +12,8 @@ public interface BasketService {
 
     void deleteById(Long id);
 
+    List<Basket> getBasketByUserId(Long id);
+
+
 
 }
