@@ -21,7 +21,7 @@ public class OrderController {
 
     @PostMapping
     public void saveOrder(@RequestParam Long id){
-
+            orderService.saveById(id);
     }
 
 }

@@ -8,7 +8,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -35,5 +37,23 @@ public class ProductServiceImpl implements ProductService {
     public void deleteById(Long id) {
         productRepository.deleteById(id);
     }
+
+    @Override
+    public Optional<Product> findByProductId(Long id) {
+        return productRepository.findById(id);
+    }
+
+    @Override
+    public Product updateProduct(Product product,Long id) {
+        Optional<Product> dbProduct = findByProductId(id);
+        return dbProduct.map(product1 -> {
+            product1.setDescription(product.getDescription());
+            product1.setName(product.getName());
+            product1.setPrice(product.getPrice());
+            product1.setQuantity(product.getQuantity());
+            return productRepository.save(product1);
+        }).orElseThrow(EntityNotFoundException::new);
+    }
+
 
 }

@@ -24,8 +24,11 @@ public class Order {
     @CreatedDate
     private LocalDate createdDate;
 
-    //private Customer customer;
-    //private Product product;
+    @ManyToOne
+    private Customer customer;
+
+    @ManyToOne
+    private Product product;
 
 
 

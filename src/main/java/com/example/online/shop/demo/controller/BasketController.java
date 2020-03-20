@@ -22,6 +22,12 @@ public class BasketController {
     @GetMapping
     public List<Basket> getBasketById(@RequestParam Long id){return basketService.getBasketByUserId(id); }
 
+    @PutMapping("/{id}")
+    public void updateBasket(@PathVariable Long id, @RequestBody Basket newBasket){
+                   List<Basket> basketList = basketService.getBasketByUserId(id);
+
+    };
+
     @DeleteMapping
     public void deleteBasketById(@RequestParam Long id){ basketService.deleteById(id);}
 

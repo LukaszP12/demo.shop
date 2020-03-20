@@ -10,6 +10,7 @@ import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/product")
@@ -33,6 +34,11 @@ public class ProductController {
     @DeleteMapping
     public void deleteProductById(@RequestParam Long id){
         productService.deleteById(id);
+    }
+
+    @PutMapping
+    public Product updateProductById(@RequestBody Product newProduct,@RequestParam Long id) {
+            return productService.updateProduct(newProduct,id);
     }
 
 }
