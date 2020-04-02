@@ -22,4 +22,6 @@ public interface ProductService {
 
     Product updateProduct(Product product,Long id);
 
+    List<String> autoComplete(String name);
+
 }

@@ -6,6 +6,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -22,7 +23,7 @@ public class Order {
     private int quantity;
 
     @CreatedDate
-    private LocalDate createdDate;
+    private LocalDateTime createdDate;
 
     @ManyToOne
     private Customer customer;
@@ -30,8 +31,8 @@ public class Order {
     @ManyToOne
     private Product product;
 
+    private String code;
 
-
-
+    private double sumPrice;
 
 }

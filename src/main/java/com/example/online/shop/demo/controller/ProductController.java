@@ -31,6 +31,11 @@ public class ProductController {
     @GetMapping
     public Page<Product> getPageProduct(@RequestParam int page,@RequestParam int size){return productService.getPage(PageRequest.of(page,size)); }
 
+    @GetMapping("/autocomplete")
+    public List<String> autoComplete(@RequestParam String name){
+        return productService.autoComplete(name);
+    }
+
     @DeleteMapping
     public void deleteProductById(@RequestParam Long id){
         productService.deleteById(id);
@@ -40,5 +45,7 @@ public class ProductController {
     public Product updateProductById(@RequestBody Product newProduct,@RequestParam Long id) {
             return productService.updateProduct(newProduct,id);
     }
+
+
 
 }

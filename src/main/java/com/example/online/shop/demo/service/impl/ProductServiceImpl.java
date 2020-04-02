@@ -55,5 +55,10 @@ public class ProductServiceImpl implements ProductService {
         }).orElseThrow(EntityNotFoundException::new);
     }
 
+    @Override
+    public List<String> autoComplete(String name) {
+        return productRepository.getProductName(name);
+    }
+
 
 }
