@@ -5,6 +5,7 @@ import com.example.online.shop.demo.repository.CustomerRepository;
 import com.example.online.shop.demo.repository.RoleRepository;
 import com.example.online.shop.demo.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -20,9 +21,13 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public Customer save(Customer customer) {
         roleRepository.findByName("ROLE_USER").ifPresent(role -> customer.setRolesList(Arrays.asList(role)));
+        customer.setPassword(passwordEncoder.encode(customer.getPassword()));
         return customerRepository.save(customer);
     }
 

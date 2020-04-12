@@ -24,7 +24,7 @@ public class Customer {
     private String email;
     private String password;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> rolesList;
 
     //private List<Order> orders = new ArrayList<Order>();

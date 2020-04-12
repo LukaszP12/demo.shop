@@ -17,7 +17,7 @@ public class Role {
     private Long id;
     private String name;
 
-    @ManyToMany
-    private List<Order> orderList;
+    //@ManyToMany
+    //private List<Order> orderList;
 
 }
