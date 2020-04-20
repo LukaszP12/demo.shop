@@ -1,6 +1,6 @@
 package com.example.online.shop.demo.service;
 
-import com.example.online.shop.demo.dao.Basket;
+import com.example.online.shop.demo.model.dao.Basket;
 
 import java.util.List;
 
@@ -10,10 +10,10 @@ public interface BasketService {
 
     List<Basket> getAll();
 
-    void deleteById(Long id);
+    void deleteByProductId(Long id);
 
-    List<Basket> getBasketByUserId(Long id);
+    List<Basket> getBasketByUserId();
 
-
+     Basket updateBasket(Basket basket);
 
 }

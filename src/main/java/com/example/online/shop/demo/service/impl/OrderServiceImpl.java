@@ -1,13 +1,13 @@
 package com.example.online.shop.demo.service.impl;
 
-import com.example.online.shop.demo.dao.Basket;
-import com.example.online.shop.demo.dao.Order;
-import com.example.online.shop.demo.dao.Product;
+import com.example.online.shop.demo.model.dao.Basket;
+import com.example.online.shop.demo.model.dao.Order;
 import com.example.online.shop.demo.repository.BasketRepository;
 import com.example.online.shop.demo.repository.OrderRepository;
 import com.example.online.shop.demo.service.BasketService;
 import com.example.online.shop.demo.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,8 +27,10 @@ public class OrderServiceImpl implements OrderService {
     private BasketService basketService;
 
     @Override
-    public void saveById(Long id) {
-        List<Basket> basketList = basketRepository.findByCustomerId(id);
+    public void save() {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        List<Basket> basketList = basketRepository.findByCustomerEmail(email);
         String orderCode = UUID.randomUUID().toString();
         orderRepository.saveAll(basketList.stream().map(basket -> Order.builder()
                 .product(basket.getProduct())
@@ -45,12 +47,17 @@ public class OrderServiceImpl implements OrderService {
 
 
     public void deleteById(Long id) {
-        basketService.deleteById(id);
+
     }
 
     @Override
-    public List<Order> orderByCustomerId(Long id) {
-        return orderRepository.findByCustomerId(id);
+    public List<OrderRepository.GrouppedOrders> getSumOrder() {
+        return orderRepository.getSumOrder(SecurityContextHolder.getContext().getAuthentication().getName());
+    }
+
+    @Override
+    public List<Order> getOrderByCode(String code) {
+        return orderRepository.findByCode(code);
     }
 
 

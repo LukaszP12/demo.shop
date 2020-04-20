@@ -1,4 +1,4 @@
-package com.example.online.shop.demo.dao;
+package com.example.online.shop.demo.model.dao;
 
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;

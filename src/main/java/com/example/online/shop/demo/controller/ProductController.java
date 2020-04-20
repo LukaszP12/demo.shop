@@ -1,16 +1,14 @@
 package com.example.online.shop.demo.controller;
 
-import com.example.online.shop.demo.dao.Product;
-import com.example.online.shop.demo.service.OrderService;
+import com.example.online.shop.demo.model.dao.Product;
 import com.example.online.shop.demo.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.querydsl.QPageRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/product")
@@ -19,6 +17,7 @@ public class ProductController {
     private ProductService productService;
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public Product saveProduct(@RequestBody Product product){
         return productService.save(product);
     }
@@ -37,15 +36,15 @@ public class ProductController {
     }
 
     @DeleteMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteProductById(@RequestParam Long id){
         productService.deleteById(id);
     }
 
     @PutMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public Product updateProductById(@RequestBody Product newProduct,@RequestParam Long id) {
             return productService.updateProduct(newProduct,id);
     }
-
-
 
 }

@@ -1,15 +1,16 @@
 package com.example.online.shop.demo.controller;
 
-import com.example.online.shop.demo.dao.Basket;
+import com.example.online.shop.demo.model.dao.Basket;
 import com.example.online.shop.demo.service.BasketService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/basket")
+@PreAuthorize("isAuthenticated()")
 public class BasketController {
     @Autowired
     private BasketService basketService;
@@ -20,15 +21,14 @@ public class BasketController {
     }
 
     @GetMapping
-    public List<Basket> getBasketById(@RequestParam Long id){return basketService.getBasketByUserId(id); }
+    public List<Basket> getBasketById(){return basketService.getBasketByUserId(); }
 
-    @PutMapping("/{id}")
-    public void updateBasket(@PathVariable Long id, @RequestBody Basket newBasket){
-                   List<Basket> basketList = basketService.getBasketByUserId(id);
+    @PutMapping
+    public void updateBasket(@RequestBody Basket newBasket){
 
     };
 
-    @DeleteMapping
-    public void deleteBasketById(@RequestParam Long id){ basketService.deleteById(id);}
+    @DeleteMapping("/{productId}")
+    public void deleteBasketById(@PathVariable Long productId){ basketService.deleteByProductId(productId);}
 
 }

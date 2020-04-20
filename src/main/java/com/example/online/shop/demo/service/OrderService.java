@@ -1,13 +1,16 @@
 package com.example.online.shop.demo.service;
 
-import com.example.online.shop.demo.dao.Order;
+import com.example.online.shop.demo.model.dao.Order;
+import com.example.online.shop.demo.repository.OrderRepository;
 
 import java.util.List;
 
 public interface OrderService {
 
-    void saveById(Long id);
+    void save();
 
-    List<Order> orderByCustomerId(Long id);
+    List<OrderRepository.GrouppedOrders> getSumOrder();
+
+    List<Order> getOrderByCode(String code);
 
 }

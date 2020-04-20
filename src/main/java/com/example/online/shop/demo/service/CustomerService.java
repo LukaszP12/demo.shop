@@ -1,6 +1,6 @@
 package com.example.online.shop.demo.service;
 
-import com.example.online.shop.demo.dao.Customer;
+import com.example.online.shop.demo.model.dao.Customer;
 
 import java.util.List;
 import java.util.Optional;

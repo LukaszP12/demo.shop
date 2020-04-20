@@ -1,6 +1,6 @@
 package com.example.online.shop.demo.service.impl;
 
-import com.example.online.shop.demo.dao.Product;
+import com.example.online.shop.demo.model.dao.Product;
 import com.example.online.shop.demo.repository.ProductRepository;
 import com.example.online.shop.demo.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;

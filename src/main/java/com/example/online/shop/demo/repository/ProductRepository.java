@@ -1,6 +1,6 @@
 package com.example.online.shop.demo.repository;
 
-import com.example.online.shop.demo.dao.Product;
+import com.example.online.shop.demo.model.dao.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

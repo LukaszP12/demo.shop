@@ -1,27 +1,36 @@
 package com.example.online.shop.demo.controller;
 
 
-import com.example.online.shop.demo.dao.Order;
+import com.example.online.shop.demo.model.dao.Order;
+import com.example.online.shop.demo.repository.OrderRepository;
 import com.example.online.shop.demo.service.OrderService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/order")
+@PreAuthorize("isAuthenticated()")
+@RequiredArgsConstructor
 public class OrderController {
-    @Autowired
-    private OrderService orderService;
+
+    private final OrderService orderService;
 
     @GetMapping
-    public List<Order> getOrders(@RequestParam Long id){
-        return orderService.orderByCustomerId(id);
+    public List<OrderRepository.GrouppedOrders> getOrders(){
+        return orderService.getSumOrder();
     }
 
     @PostMapping
-    public void saveOrder(@RequestParam Long id){
-            orderService.saveById(id);
+    public void saveOrder(){
+            orderService.save();
+    }
+
+    @GetMapping("/details")
+    public List<Order> getOrdersByCode(@RequestParam String code){
+        return orderService.getOrderByCode(code);
     }
 
 }

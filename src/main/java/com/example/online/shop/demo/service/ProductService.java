@@ -1,7 +1,7 @@
 package com.example.online.shop.demo.service;
 
 
-import com.example.online.shop.demo.dao.Product;
+import com.example.online.shop.demo.model.dao.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

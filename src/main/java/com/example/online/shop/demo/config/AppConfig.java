@@ -1,8 +1,7 @@
 package com.example.online.shop.demo.config;
 
-import com.example.online.shop.demo.dao.Role;
+import com.example.online.shop.demo.model.dao.Role;
 import com.example.online.shop.demo.repository.RoleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,8 +23,16 @@ public class AppConfig {
         return args -> {
             Optional<Role> roleUser = roleRepository.findByName("ROLE_USER");
             if (roleUser.isEmpty()){
-                new Role("ROLE_USER");
+               roleRepository.save(new Role(null,"ROLE_USER"));
             }
+            Optional<Role> roleAdmin = roleRepository.findByName("ROLE_ADMIN");
+            if (roleAdmin.isEmpty()){
+                roleRepository.save(Role.builder()
+                    .name("ROLE_ADMIN")
+                    .build()
+                );
+            }
+
         };
     }
 

@@ -1,6 +1,6 @@
 package com.example.online.shop.demo.service.impl;
 
-import com.example.online.shop.demo.dao.Customer;
+import com.example.online.shop.demo.model.dao.Customer;
 import com.example.online.shop.demo.repository.CustomerRepository;
 import com.example.online.shop.demo.repository.RoleRepository;
 import com.example.online.shop.demo.service.CustomerService;
@@ -45,4 +45,5 @@ public class CustomerServiceImpl implements CustomerService {
     public Optional<Customer> findById(Long id) {
         return customerRepository.findById(id);
     }
+
 }

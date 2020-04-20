@@ -1,9 +1,8 @@
-package com.example.online.shop.demo.dao;
+package com.example.online.shop.demo.model.dao;
 
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Data

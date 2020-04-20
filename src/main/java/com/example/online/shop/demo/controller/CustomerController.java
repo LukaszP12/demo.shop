@@ -1,6 +1,6 @@
 package com.example.online.shop.demo.controller;
 
-import com.example.online.shop.demo.dao.Customer;
+import com.example.online.shop.demo.model.dao.Customer;
 import com.example.online.shop.demo.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,6 +21,7 @@ public class CustomerController {
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public List<Customer> getCustomers() {
         return customerService.getAll();
     }
@@ -31,6 +32,7 @@ public class CustomerController {
         customerService.deleteById(id);
     }
 
+    // przeniesc metode do service
     @PutMapping("/{id}")
     public void updateCustomerById(@RequestBody Customer newCustomer, @PathVariable Long id){
          Optional<Customer> customer = customerService.findById(id);
