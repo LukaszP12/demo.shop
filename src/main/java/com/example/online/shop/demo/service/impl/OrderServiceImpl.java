@@ -6,6 +6,7 @@ import com.example.online.shop.demo.repository.BasketRepository;
 import com.example.online.shop.demo.repository.OrderRepository;
 import com.example.online.shop.demo.service.BasketService;
 import com.example.online.shop.demo.service.OrderService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
     @Autowired
