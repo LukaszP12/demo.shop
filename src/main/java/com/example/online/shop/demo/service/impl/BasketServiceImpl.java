@@ -76,9 +76,15 @@ public class BasketServiceImpl implements BasketService {
 
     @Override
     public Basket updateBasket(Basket basket) {
-        List<Basket> basketByUserId = getBasketByUserId(this);
-        
-        return null;
+        Optional<Basket> optionalBasket = basketRepository.findByCustomerEmailAndProductId(SecurityContextHolder.getContext().getAuthentication().getName(), basket.getProduct().getId());
+        if (optionalBasket.isPresent()){
+            Basket basketDB = optionalBasket.get();
+            basketDB.setQuantity(basket.getQuantity());
+            return basketRepository.save(basketDB);
+        } else {
+            return addToBasket(basket);
+        }
+
     }
 
 }
